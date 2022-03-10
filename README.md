@@ -32,11 +32,16 @@ SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON trans
 SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020 and transactions.market_code="Mark001";
 
 # Data Analysis Using Power BI
+
 1.importing data from sql into power bi. 
+
 2.using transform data tool to check for errors present in the database. 
+
 3.Formula to create norm_amount column
 = Table.AddColumn(#"Filtered Rows", "norm_amount", each if [currency] = "USD" or [currency] ="USD#(cr)" then [sales_amount]*75 else [sales_amount], type any)
+
 4.deleting the old column
  = Table.RemoveColumns(#"Filtered Rows1",{"sales_amount"})
- 4. revising new column
+ 
+5. revising new column
   = Table.TransformColumnTypes(#"Renamed Columns",{{"sales_amount", type number}})
