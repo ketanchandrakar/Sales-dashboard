@@ -1,2 +1,42 @@
 # Sales-dashboard
 In this project i tried to make use of my basic sql knowledge to analye the chunk of data of a company's sales and than some  data cleaning tp build a dashboard that can help us generate sales insights
+
+# Data Analysis Using SQL
+checking the type of data present in vairious tables.
+1. Show all customer records
+SELECT * FROM customers;
+
+2.Show total number of customers
+SELECT count(*) FROM customers;
+
+3.Show transactions for Mumbai market (market code for Mumbai is Mark002
+SELECT * FROM transactions where market_code='Mark002';
+
+4.Show distrinct product codes that were sold in Mumbai
+SELECT distinct product_code FROM transactions where market_code='Mark002';
+
+checking for uniformity in the curerrency data. 
+5.Show transactions where currency is US dollarsSELECT * from transactions where currency="USD"
+
+6.Show transactions in 2020 join by date table
+SELECT transactions.*, date.* FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020;
+
+after thorough checking i came to know that there are two types of data in currency.
+7.Show total revenue in year 2020,
+SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020 and transactions.currency="INR\r" or transactions.currency="USD\r";
+
+8.Show total revenue in year 2020, January Month,
+SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020 and and date.month_name="January" and (transactions.currency="INR\r" or transactions.currency="USD\r");
+
+9.Show total revenue in year 2020 in Chennai
+SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020 and transactions.market_code="Mark001";
+
+# Data Analysis Using Power BI
+1.importing data from sql into power bi. 
+2.using transform data tool to check for errors present in the database. 
+3.Formula to create norm_amount column
+= Table.AddColumn(#"Filtered Rows", "norm_amount", each if [currency] = "USD" or [currency] ="USD#(cr)" then [sales_amount]*75 else [sales_amount], type any)
+4.deleting the old column
+ = Table.RemoveColumns(#"Filtered Rows1",{"sales_amount"})
+ 4. revising new column
+  = Table.TransformColumnTypes(#"Renamed Columns",{{"sales_amount", type number}})
