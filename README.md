@@ -1,6 +1,7 @@
 # Sales-dashboard
 
-In this project i tried to make use of my basic sql knowledge to analyse the chunk of data of a company's sales and than some  data cleaning to build a dashboard that can help us generate sales insights
+In this project i used sql queries in mysql to get a overview of data and to analyse data of a  hardware company's sales & PowerBI for ETL(Extract,Transform,and Load) and Visualization to develop meaningful insights 
+The database contains 5 tables: customers, date, markets, products, and transactions;
 
 # Data Analysis Using SQL
 checking the type of data present in vairious tables.
@@ -29,9 +30,12 @@ SELECT * from transactions where currency="USD"
 
 6.Show transactions in 2020 join by date table
 
-SELECT transactions.*, date.* FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020;
+SELECT transactions , date 
+FROM transactions 
+INNER JOIN date 
+ON transactions.order_date=date.date where date.year=2020;
 
-after thorough checking i came to know that there are two types of data in currency.
+# after thorough checking i came to know that there are two types of data in currency one in rupees and other in usd.
 
 7.Show total revenue in year 2020,
 
@@ -60,8 +64,5 @@ SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON trans
  = Table.RemoveColumns(#"Filtered Rows1",{"sales_amount"})
  
 5. revising new column
-
-
-  = Table.TransformColumnTypes(#"Renamed Columns",{{"sales_amount", type number}})
-  
-  6. ![sales dashboard](https://user-images.githubusercontent.com/101324556/157646400-d0b6ab51-e1eb-4d1b-a053-73d6d6ad69ee.png)
+ = Table.TransformColumnTypes(#"Renamed Columns",{{"sales_amount", type number}})
+6. ![sales dashboard](https://user-images.githubusercontent.com/101324556/157646400-d0b6ab51-e1eb-4d1b-a053-73d6d6ad69ee.png)
