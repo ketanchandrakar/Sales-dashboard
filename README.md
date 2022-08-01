@@ -35,7 +35,7 @@ FROM transactions
 INNER JOIN date 
 ON transactions.order_date=date.date where date.year=2020;
 
-# after thorough checking i came to know that there are two types of data in currency one in rupees and other in usd.
+after thorough checking i came to know that there are two types of data in currency one in rupees and other in usd.
 
 7.Show total revenue in year 2020,
 
